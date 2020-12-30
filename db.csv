@@ -1,3 +1,9 @@
 name,email,message
+<<<<<<< HEAD
 Ben,ben@ten.com,Something...
 ben,ben@tennyson.com,"Hello, Gwen!"
+=======
+Ben,ben@ten.com,What an amazing website!
+Fake,fake@this.com,I'm not faking it!
+Me,me@mysite.com,This is just me!
+>>>>>>> 6a975250da5101c40d3cdf4f6f53a2d9ebf7e2c6
