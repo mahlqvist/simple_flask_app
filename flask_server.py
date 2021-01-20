@@ -12,22 +12,24 @@ def home():
 def form_submitted():
   return render_template('submitted.html')
 
-def check_db(csv):
-  with open(csv) as file_to_check:
-    line = file_to_check.readline()
-    return True if line else False
+def get_header(file):
+  with open(file) as db:
+    reader = csv.reader(db, delimiter=",")
+    header = next(reader, None)
+  return header
     
 def write_to_csv(data):
   name = data["name"]
   email = data["email"]
   message = data["message"]
   database = 'db.csv'
-  with open(database, mode='a', newline='') as db:
-    writer = csv.writer(db, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    if not check_db(database):
-      writer.writerow(['name', 'email', 'message'])
-    writer.writerow([name, email, message])
-    
+  with open(database, mode='a', newline='') as outfile:
+    writer = csv.writer(outfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    if not get_header(database):
+      writer.writerow(["name", "email", "message"])
+      writer.writerow([name, email, message])
+    else:
+      writer.writerow([name, email, message])
 
 @app.route('/submit_form', methods=['POST', 'GET'])
 def submit_form():
